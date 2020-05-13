@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="gb2312"?>
+<exam>
+  <examinfo>
+    <!--exmName-->
+    <name>ECG</name>
+    <!--exmDevice-->
+    <ecgid>3RAY</ecgid>
+    <!--exmBARCODE-->
+    <barcode>231435132135</barcode>
+    <!--exmDateTime-->
+    <ExamDate>12/09/2017 05:54:25</ExamDate>
+  </examinfo>
+  <examitem>
+    <!--EngName-->
+    <ename>HR</ename>
+    <!--ChnName-->
+    <cname>心率</cname>
+    <!--exmResult-->
+    <result>58</result>
+    <!--exmUnit-->
+    <unit>次//分</unit>
+    <!--range-->
+    <range>60-100(成人)</range>
+    <!--prompt-->
+    <prompt>==undefined==</prompt>
+  </examitem>
+  <examitem>
+    <!--EngName-->
+    <ename>ECG-DIAG</ename>
+    <!--ChnName-->
+    <cname>心电图解释</cname>
+    <!--exmResult-->
+    <result>801 窦性心动过缓
+421 起搏心律?
+832 异常QRS心搏(异位早搏可能)
+310 左心室高电压
+611 T波改变(低平)
+*** 异常心电图 ***</result>
+    <!--(1)正常，(2)异常-->
+    <unit>2</unit>
+    <!--range-->
+    <range>==undefined==</range>
+    <!--prompt-->
+    <prompt>==undefined==</prompt>
+  </examitem>
+</exam>

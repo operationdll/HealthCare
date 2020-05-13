@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dao.HealthCheckMapper">
+	<resultMap id="HealthCheckMap"
+		type="com.dto.HealthCheckDto"></resultMap>
+	<resultMap id="SelfCareMap"
+		type="com.dto.SelfCareDto"></resultMap>
+	<resultMap id="TCMMap"
+		type="com.dto.TCMDto"></resultMap>
+		
+	<select id="getHealthCheck" resultMap="HealthCheckMap"
+		parameterType="int">
+		select * from healthcheckup where pid= #{pid}
+	</select>
+	
+	<update id="updGenerally"
+		parameterType="com.dto.HealthCheckDto">
+		update healthcheckup set field1 = #{field1},field2 = #{field2},
+			field3 = #{field3},field4 = #{field4},field5 = #{field5},
+			field6 = #{field6},field7 = #{field7},field8 = #{field8},
+			field9 = #{field9},field10 = #{field10},field11 = #{field11},
+			field12 = #{field12},field13 = #{field13},field219 = #{field219},
+			field15 = #{field15},field16 = #{field16},field17 = #{field17},
+			field18 = #{field18},updateDate=NOW()
+		where pid = #{pid}
+	</update>
+	
+	<update id="updLifestyle"
+		parameterType="com.dto.HealthCheckDto">
+		update healthcheckup set field20 = #{field20},field21 = #{field21},
+			field22 = #{field22},field25 = #{field25},field26 = #{field26},
+			field27 = #{field27},field28 = #{field28},field29 = #{field29},
+			field31 = #{field31},field32 = #{field32},field19 = #{field19},
+			field24 = #{field24},field30 = #{field30},field33 = #{field33},
+			field23 = #{field23},field34 = #{field34},field35 = #{field35},
+			field36 = #{field36},updateDate=NOW()
+		where pid = #{pid}
+	</update>
+	
+	<update id="updOrgan"
+		parameterType="com.dto.HealthCheckDto">
+		update healthcheckup set field51 = #{field51},field52 = #{field52},
+			field53 = #{field53},field54 = #{field54},field55 = #{field55},
+			field56 = #{field56},field57 = #{field57},field58 = #{field58},
+			field59 = #{field59},field60 = #{field60},field61 = #{field61},
+			field62 = #{field62},field64 = #{field64},field65 = #{field65},
+			field66 = #{field66},field67 = #{field67},field68 = #{field68},
+			field69 = #{field69},field63 = #{field63},field49 = #{field49},
+			field50 = #{field50},updateDate=NOW()
+		where pid = #{pid}
+	</update>
+	
+	<update id="updExam"
+		parameterType="com.dto.HealthCheckDto">
+		update healthcheckup set field77 = #{field77},field70 = #{field70},
+			field71 = #{field71},field72 = #{field72},field73 = #{field73},
+			field74 = #{field74},field75 = #{field75},field76 = #{field76},
+			field78 = #{field78},field79 = #{field79},field80 = #{field80},
+			field81 = #{field81},field82 = #{field82},field83 = #{field83},
+			field84 = #{field84},field85 = #{field85},field86 = #{field86},
+			field94 = #{field94},field87 = #{field87},field89 = #{field89},
+			field90 = #{field90},field91 = #{field91},field92 = #{field92},
+			field93 = #{field93},field88 = #{field88},field131 = #{field131},
+			field220 = #{field220},field221 = #{field221},field256 = #{field256},
+			field257 = #{field257},
+			updateDate=NOW()
+		where pid = #{pid}
+	</update>
+	
+	<update id="updAssistantExam"
+		parameterType="com.dto.HealthCheckDto">
+		update healthcheckup set field97 = #{field97},field98 = #{field98},
+			field99 = #{field99},field100 = #{field100},field101 = #{field101},
+			field102 = #{field102},field103 = #{field103},field104 = #{field104},
+			field105 = #{field105},field106 = #{field106},field108 = #{field108},
+			field114 = #{field114},field115 = #{field115},field116 = #{field116},
+			field117 = #{field117},field103 = #{field103},field104 = #{field104},
+			field118 = #{field118},field119 = #{field119},field120 = #{field120},
+			field123 = #{field123},field124 = #{field124},field125 = #{field125},
+			field126 = #{field126},field128 = #{field128},field245 = #{field245},
+			field133 = #{field133},field136 = #{field136},field95 = #{field95},
+			field129 = #{field129},field130 = #{field130},field132 = #{field132},
+			field127 = #{field127},
+			updateDate=NOW()
+		where pid = #{pid}
+	</update>
+	
+	<update id="updHealthyProblem"
+		parameterType="com.dto.HealthCheckDto">
+		update healthcheckup set field138 = #{field138},field140 = #{field140},
+			field142 = #{field142},field144 = #{field144},field146 = #{field146},
+			field148 = #{field148},field137 = #{field137},field139 = #{field139},
+			field141 = #{field141},field143 = #{field143},field145 = #{field145},
+			field147 = #{field147},field268 = #{field268},field269 = #{field269},
+			updateDate=NOW()
+		where pid = #{pid}
+	</update>
+	
+	<update id="updHospitalDrug"
+		parameterType="com.dto.HealthCheckDto">
+		update healthcheckup set  field153 = #{field153},field188 = #{field188},
+			field154 = #{field154},field155 = #{field155},field156 = #{field156},
+			field157 = #{field157},field158 = #{field158},field171 = #{field171},
+			field176 = #{field176},field181 = #{field181},field186 = #{field186},
+			field169 = #{field169},field174 = #{field174},field179 = #{field179},
+			field184 = #{field184},field170 = #{field170},field175 = #{field175},
+			field180 = #{field180},field185 = #{field185},field172 = #{field172},
+			field177 = #{field177},field182 = #{field182},field187 = #{field187},
+			field173 = #{field173},field178 = #{field178},field183 = #{field183},
+			<if test="field149!=null">
+				field149 = #{field149},
+			</if>
+			<if test="field150!=null">
+				field150 = #{field150},
+			</if>
+			<if test="field151!=null">
+				field151 = #{field151},
+			</if>
+			<if test="field152!=null">
+				field152 = #{field152},
+			</if>
+			updateDate=NOW()
+		where pid = #{pid}
+	</update>
+	
+	<update id="updHealthyComment"
+		parameterType="com.dto.HealthCheckDto">
+		update healthcheckup set field209 = #{field209},field211 = #{field211},
+			field212 = #{field212},field213 = #{field213},field216 = #{field216},
+			field217 = #{field217},field218 = #{field218},field208 = #{field208},
+			field214 = #{field214},field215 = #{field215},
+			updateDate=NOW()
+		where pid = #{pid}
+	</update>
+	
+	<select id="getSelfcare" resultMap="SelfCareMap"
+		parameterType="int">
+		select * from selfcare where pid= #{pid}
+	</select>
+	
+	<update id="updSelfcare"
+		parameterType="com.dto.SelfCareDto">
+		update selfcare set field6 = #{field6},field7 = #{field7},
+			field9 = #{field9},field1 = #{field1},field2 = #{field2},
+			field3 = #{field3},field4 = #{field4},field5 = #{field5},
+			<if test="field8!=null">
+				field8 = #{field8},
+			</if>
+			updateDate=NOW()
+		where pid = #{pid}
+	</update>
+	
+	<select id="getTCM" resultMap="TCMMap"
+		parameterType="int">
+		select * from TCM where pid= #{pid}
+	</select>
+	
+	<update id="updTCM"
+		parameterType="com.dto.TCMDto">
+		update TCM set field52 = #{field52},field43 = #{field43},
+			field44 = #{field44},field45 = #{field45},field46 = #{field46},
+			field47 = #{field47},field48 = #{field48},field49 = #{field49},
+			field50 = #{field50},field51 = #{field51},field34 = #{field34},
+			field35 = #{field35},field36 = #{field36},field37 = #{field37},
+			field38 = #{field38},field39 = #{field39},field40 = #{field40},
+			field41 = #{field41},field42 = #{field42},field1 = #{field1},
+			field2 = #{field2},field3 = #{field3},field4 = #{field4},
+			field5 = #{field5},field6 = #{field6},field7 = #{field7},
+			field8 = #{field8},field9 = #{field9},field10 = #{field10},
+			field11 = #{field11},field12 = #{field12},field13 = #{field13},
+			field14 = #{field14},field15 = #{field15},field16 = #{field16},
+			field17 = #{field17},field18 = #{field18},field19 = #{field19},
+			field20 = #{field20},field21 = #{field21},field22 = #{field22},
+			field23 = #{field23},field24 = #{field24},field25 = #{field25},
+			field26 = #{field26},field27 = #{field27},field28 = #{field28},
+			field29 = #{field29},field30 = #{field30},field31 = #{field31},
+			field32 = #{field32},field33 = #{field33},field53 = #{field53},
+			field54 = #{field54},field55 = #{field55},field56 = #{field56},
+			field57 = #{field57},field58 = #{field58},field59 = #{field59},
+			field60 = #{field60},field61 = #{field61},
+			updateDate=NOW()
+		where pid = #{pid}
+	</update>
+	
+	<update id="updHealthyResult"
+		parameterType="com.dto.HealthCheckDto">
+		update healthcheckup set field208 = #{field208},field209 = #{field209},
+			field211 = #{field211},field212 = #{field212},field213 = #{field213},
+			field214 = #{field214},field215 = #{field215},field216 = #{field216},
+			field218 = #{field218},
+			updateDate=NOW()
+		where pid = #{pid}
+	</update>
+	
+	<update id="updCP"
+		parameterType="com.dto.HealthCheckDto">
+		update healthcheckup set field14 = #{field14},field247 = #{field247},
+			field248 = #{field248},field249 = #{field249},field250 = #{field250},
+			updateDate=NOW()
+		where pid = #{pid}
+	</update>
+	
+	<update id="syndata"
+		parameterType="java.util.Map">
+			<if test="synnum==1">
+				update healthcheckup set field77=field5,
+					updateDate=NOW()
+				where pid in (${ids})
+			</if>
+			<if test="synnum==2">
+				update healthcheckup set field5=field77,
+					updateDate=NOW()
+				where pid in (${ids})
+			</if>
+	</update>
+	
+</mapper>

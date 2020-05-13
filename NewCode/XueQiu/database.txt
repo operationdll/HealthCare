@@ -1,0 +1,1 @@
+com.mysql.jdbc.Driver;jdbc:mysql://localhost:3306/HealthCare?useUnicode=true&characterEncoding=utf8&autoReconnect=true&zeroDateTimeBehavior=convertToNull;root;root123

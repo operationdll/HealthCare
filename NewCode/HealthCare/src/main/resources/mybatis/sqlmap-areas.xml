@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dao.AreaMapper">
+	<resultMap id="AreaMap" type="com.dto.AreaDto"></resultMap>
+	
+	<select id="getAreaList" resultMap="AreaMap"
+		parameterType="java.util.Map">
+		SELECT * FROM areas where level = #{level}
+		<if test="name!='' and name!=null">
+			and name like concat('%',#{name},'%')
+		</if>
+		<if test="	pcode!='' and 	pcode!=null">
+			and pcode = #{pcode}
+		</if>
+	</select>
+	
+	<insert id="insertArea"
+		parameterType="com.dto.AreaDto">
+		INSERT INTO areas(code,name,pname,pcode,hcode,level,createDate,updateDate)
+		VALUES(#{code},#{name},#{pname},#{pcode},#{hcode},#{level},NOW(),NOW())
+	</insert>
+	
+	<update id="updArea"
+		parameterType="com.dto.AreaDto">
+		update areas set code = #{code},name = #{name},pname = #{pname},pcode = #{pcode},hcode = #{hcode},level = #{level},updateDate=NOW()
+		where id = #{id}
+	</update>
+	
+	<delete id="delArea" parameterType="java.util.Map">
+		<![CDATA[
+			delete from areas where level = #{level}
+			and code <> #{oldCode}
+			and code like concat(#{oldCode},'%')
+		]]>
+	</delete>
+	
+</mapper>

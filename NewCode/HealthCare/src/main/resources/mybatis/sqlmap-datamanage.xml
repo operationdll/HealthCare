@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dao.DataManageMapper">
+	<resultMap id="DataReviewFormMap" 
+	    type="com.form.DataReviewForm"></resultMap>
+	
+	<resultMap id="FormModel" 
+	    type="com.form.FormModel"></resultMap>  
+
+	<!-- 获取查询信息 -->
+	<select id="getDateList" resultMap="DataReviewFormMap"
+		parameterType="java.util.Map">
+		select * from(
+			select t1.id id,
+				t1.name field1,
+				t1.sex field2,
+				t1.birthdate field3,
+				t3.field1 field4,
+				t1.code field5,
+				t3.field208 field6,
+				t4.field1 field7,
+				t2.field1 field8,
+				t1.createDate field9,
+				t1.updateDate field10,
+				t3.field2 field11,
+				t3.field6 field12,
+				t3.field13 field13,
+				t3.field15 field14,
+				t3.field16 field15,
+				t3.field17 field16,
+				t3.field18 field17,
+				t3.field19 field18,
+				t3.field23 field19,
+				t3.field24 field20,
+				t3.field28 field21,
+				t3.field50 field22,
+				t3.field64 field23,
+				t3.field65 field24,
+				t3.field68 field25,
+				t3.field69 field26,
+				t3.field137 field27,
+				t3.field139 field28,
+				t3.field141 field29,
+				t3.field143 field30,
+				t3.field145 field31,
+				t3.field147 field32,
+				t3.field11 field33,
+				t3.field12 field34,
+				t3.field219 field35,
+				t3.field7 field36,
+				t3.field8 field37,
+				t3.field9 field38,
+				t3.field10 field39,
+				t3.field5 field40,
+				t3.field97 field41,
+				t3.field98 field42,
+				t3.field99 field43,
+				t3.field100 field44,
+				t3.field103 field45,
+				t3.field104 field46,
+				t3.field101 field47,
+				t3.field102 field48,
+				t3.field105 field49,
+				t3.field114 field50,
+				t3.field115 field51,
+				t3.field117 field52,
+				t3.field119 field53,
+				t3.field120 field54,
+				t3.field123 field55,
+				t3.field124 field56,
+				t3.field125 field57,
+				t3.field126 field58,
+				t3.field106 field59,
+				t3.field127 field60,
+				t3.field128 field61,
+				t3.field77 field62,
+				t3.field130 field63,
+				t3.field133 field64,
+				t3.field214 field65,
+				t3.field215 field66,
+				t4.field1 field67,
+				t4.field2 field68,
+				t4.field3 field69,
+				t4.field4 field70,
+				t4.field5 field71,
+				t4.field9 field72,
+				t2.field42 field73,
+				t2.field34 field74,
+				t2.field35 field75,
+				t2.field36 field76,
+				t2.field37 field77,
+				t2.field38 field78,
+				t2.field39 field79,
+				t2.field40 field80,
+				t2.field41 field81,
+				t2.field52 field82
+			from patients t1 left join
+			TCM t2 on t1.id = t2.pid left join
+			healthcheckup t3 on t1.id = t3.pid left join
+			selfcare t4 on t1.id = t4.pid
+			WHERE 1=1
+			and t1.hcid = #{hcid}
+			<if test="idCard!='' and idCard!=null">
+				and t1.idcard = #{idCard}
+			</if>
+			<if test="name!='' and name!=null">
+				and t1.name like concat('%',#{name},'%')
+			</if>
+			<if test="code!='' and code!=null">
+				and t1.code = #{code}
+			</if>
+			<if test="ageOver!='' and ageOver!=null">
+				<![CDATA[
+				and t1.birthdate <= STR_TO_DATE(#{ageOver},'%Y-%m-%d')
+				]]>
+			</if>
+			<if test="ageLow!='' and ageLow!=null">
+				and t1.birthdate > STR_TO_DATE(#{ageLow},'%Y-%m-%d')
+			</if>
+			and t3.field1 >= STR_TO_DATE(#{startDate},'%Y-%m-%d %H:%i:%s')
+			<![CDATA[
+			and t3.field1 <= STR_TO_DATE(#{endDate},'%Y-%m-%d %H:%i:%s')
+			]]>
+		) a1
+		<if test="filed!='' and filed!=null">
+			${filed}
+		</if>
+	</select>
+	
+	<update id="updShenHua"
+		parameterType="java.util.Map">
+		update healthcheckup set field114=#{field114},field115=#{field115},field117=#{field117},
+			field120=#{field120},field119=#{field119},field106=#{field106},field123=#{field123},
+			field124=#{field124},field126=#{field126},field125=#{field125},updateDate=NOW()
+			where pid = (select id from patients where code=#{code})
+	</update>
+	
+	<update id="updXueQiu"
+		parameterType="java.util.Map">
+		update healthcheckup set field98=#{field98},field234 = #{field234},field235=#{field235},
+		    field236=#{field236},field224=#{field224},field225=#{field225},field226=#{field226},
+		    field222=#{field222},field97=#{field97},field227=#{field227},field229=#{field229},
+		    field228=#{field228},field243=#{field243},field231=#{field231},field223=#{field223},
+		    field99=#{field99},field232=#{field232},field230=#{field230},field233=#{field233},
+		    updateDate=NOW()
+			where pid = (select id from patients where code=#{code})
+	</update>
+	
+	<update id="updSGTZ"
+		parameterType="java.util.Map">
+		update healthcheckup set field11=#{field11},field12 = #{field12},field219 = #{field219},
+		    updateDate=NOW()
+			where pid = (select id from patients where code=#{code})
+	</update>
+	
+	<update id="updXueYa"
+		parameterType="java.util.Map">
+		update healthcheckup set field5=#{field5},field7 = #{field7},field8 = #{field8},
+			field9 = #{field9},field10 = #{field10},updateDate=NOW()
+			where pid = (select id from patients where code=#{code})
+	</update>
+	
+	<update id="updNiaoYe"
+		parameterType="java.util.Map">
+		update healthcheckup set field240=#{field240},field239=#{field239},field101=#{field101},
+		    field238=#{field238},field242=#{field242},field104=#{field104},field241=#{field241},
+		    field237=#{field237},field102=#{field102},field103=#{field103},field265=#{field265},
+		    field264=#{field264},field261=#{field261},field258=#{field258},field267=#{field267},
+		    field262=#{field262},field266=#{field266},field260=#{field260},field259=#{field259},
+		    field263=#{field263},updateDate=NOW()
+			where pid = (select id from patients where code=#{code})
+	</update>
+	
+	<update id="updXinDian"
+		parameterType="java.util.Map">
+		update healthcheckup set field128=#{field128},field127 = #{field127},field77 = #{field77},
+			field246 = #{field246},updateDate=NOW()
+			where pid = (select id from patients where code=#{code})
+	</update>
+	
+	<select id="getYearNum" resultMap="FormModel">
+			SELECT count(*) as field1 FROM healthcheckup WHERE YEAR(field1)=YEAR(NOW())
+	</select>
+	
+	<select id="getSeasonNum" resultMap="FormModel">
+			SELECT count(*) as field1 FROM healthcheckup WHERE QUARTER(field1)=QUARTER(NOW())
+	</select>
+	
+	<select id="getMonthNum" resultMap="FormModel">
+			SELECT count(*) as field1 FROM healthcheckup WHERE DATE_FORMAT(field1,'%Y%m') = DATE_FORMAT(CURDATE(),'%Y%m')
+	</select>
+	
+	<select id="getDayNum" resultMap="FormModel">
+			SELECT count(*) as field1 FROM healthcheckup WHERE TO_DAYS(field1) = TO_DAYS(NOW())
+	</select>
+	
+	<select id="getProvinceNum" resultMap="FormModel">
+			SELECT
+			    t1.name as field1,
+			    COUNT(*) as field2
+			FROM
+			    areas t1
+			LEFT JOIN healthcenters t2 ON
+			    t1.code = t2.province
+			LEFT JOIN patients t3 ON
+			    t3.hcid = t2.id
+			LEFT JOIN healthcheckup t4 ON
+			    t4.pid = t3.id
+			WHERE
+			    t1.level = 1 AND YEAR(t4.field1) = YEAR(NOW())
+			GROUP BY
+			    t1.name
+	</select>
+	
+	<!-- 查询体检异常信息 -->
+	<select id="getALData" resultMap="FormModel"
+		parameterType="java.util.Map">
+			select 
+			    t2.field219 as field1,
+				t1.disease as field2,
+				CONCAT(t2.field7,'fg',t2.field8,'fg',t2.field9,'fg',t2.field10) as field3,
+				t2.field106 as field4,
+				t2.field114 as field5,
+				t2.field115 as field6,
+				t2.field117 as field8,
+				t2.field119 as field10,
+				t2.field120 as field11,
+				t2.field123 as field12,
+				t2.field124 as field13,
+				t2.field125 as field14,
+				t2.field126 as field15,
+				t2.field99 as field16,
+				t2.field97 as field17,
+				t2.field98 as field18,
+				t2.field127 as field19,
+				t2.field101 as field20,
+				t2.field102 as field21,
+				t2.field103 as field22,
+				t2.field104 as field23,
+				t2.field105 as field24,
+				t2.field130 as field25,
+				t2.field245 as field26,
+				DATE_FORMAT(t2.field1,"%Y-%m-%d") as field27,
+				t1.name as field28,
+				t1.code as field29,
+				DATE_FORMAT(t1.birthdate,"%Y-%m-%d") as field30,
+				t1.sex as field31,
+				t1.idcard as field32,
+				t1.phoneno as field33,
+				t1.address as field34,
+				t1.address1 as field35,
+				t2.field77 as field36,
+				t2.field128 as field37
+			from patients t1 left join
+			healthcheckup t2 on t1.id = t2.pid
+			WHERE t1.hcid = #{hcid}
+			and t2.field1 >= STR_TO_DATE(#{startDate},'%Y-%m-%d %H:%i:%s')
+			<![CDATA[
+			and t2.field1 <= STR_TO_DATE(#{endDate},'%Y-%m-%d %H:%i:%s')
+			]]>
+			<if test="endAge!='' and endAge!=null">
+				<![CDATA[
+				and (YEAR(CURDATE())-YEAR(t1.birthdate)) <= #{endAge}
+				]]>
+			</if>
+			<if test="startAge!='' and startAge!=null">
+				and (YEAR(CURDATE())-YEAR(t1.birthdate)) >= #{startAge}
+			</if>
+	</select>
+	
+	<!-- 查询省体检异常信息 -->
+	<select id="getProvinceData" resultMap="FormModel"
+		parameterType="java.util.Map">
+			select 
+			    t2.field219 as field1,
+				t1.disease as field2,
+				CONCAT(t2.field7,'fg',t2.field8,'fg',t2.field9,'fg',t2.field10) as field3,
+				t2.field106 as field4,
+				t2.field114 as field5,
+				t2.field115 as field6,
+				t2.field117 as field8,
+				t2.field119 as field10,
+				t2.field120 as field11,
+				t2.field123 as field12,
+				t2.field124 as field13,
+				t2.field125 as field14,
+				t2.field126 as field15,
+				t2.field99 as field16,
+				t2.field97 as field17,
+				t2.field98 as field18,
+				t2.field127 as field19,
+				t2.field101 as field20,
+				t2.field102 as field21,
+				t2.field103 as field22,
+				t2.field104 as field23,
+				t2.field105 as field24,
+				t2.field130 as field25,
+				t2.field245 as field26,
+				DATE_FORMAT(t2.field1,"%Y-%m-%d") as field27,
+				t1.name as field28,
+				t1.code as field29,
+				DATE_FORMAT(t1.birthdate,"%Y-%m-%d") as field30,
+				t1.sex as field31,
+				t1.idcard as field32,
+				t1.phoneno as field33,
+				t1.address as field34,
+				t1.address1 as field35,
+				t2.field77 as field36,
+				t2.field128 as field37
+			from patients t1 left join
+			healthcheckup t2 on t1.id = t2.pid
+			WHERE t1.id in(
+				SELECT
+				   a3.id
+				FROM
+				    areas a1
+				LEFT JOIN healthcenters a2 ON
+				    a1.code = a2.province
+				LEFT JOIN patients a3 ON
+				    a3.hcid = a2.id
+				LEFT JOIN healthcheckup a4 ON
+				    a4.pid = a3.id
+				WHERE
+				    a1.level = 1 
+				AND YEAR(a4.field1) = YEAR(NOW())
+				AND a1.name like concat(#{pname},'%')
+			)
+	</select>
+
+</mapper>

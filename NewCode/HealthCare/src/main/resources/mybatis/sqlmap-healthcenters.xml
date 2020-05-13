@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dao.BaseMapper">
+	<resultMap id="HealthCenterMap"
+		type="com.dto.HealthCenterDto"></resultMap>
+	
+	<select id="getAreaList" resultMap="HealthCenterMap"
+		parameterType="java.util.Map">
+		SELECT t1.*,t2.pname 
+		FROM healthcenters t1 LEFT JOIN areas t2 ON t1.district = t2.code
+		where 1=1
+		<if test="name!='' and name!=null">
+			and t1.name like concat('%',#{name},'%')
+		</if>
+		limit #{start},#{limit}
+	</select>
+	
+	<select id="getAllAreaList" resultMap="HealthCenterMap">
+		select * from healthcenters
+	</select>
+	
+	<select id="getHealthById" resultMap="HealthCenterMap" parameterType="int">
+		select * from healthcenters where id = #{id}
+	</select>
+	
+	<select id="getHealthByDistrict" resultMap="HealthCenterMap" parameterType="java.util.Map">
+		select * from healthcenters where 1=1
+		<if test="district!='' and district!=null">
+			and  district like concat(#{district},'%')
+		</if>
+	</select>
+
+	<select id="getAreaListCount" resultType="Integer"
+		parameterType="java.util.Map">
+		select count(1) from healthcenters where 1=1
+		<if test="name!='' and name!=null">
+			and name like concat('%',#{name},'%')
+		</if>
+	</select>
+
+	<insert id="insertHealthCenter"
+		parameterType="com.dto.HealthCenterDto">
+		INSERT INTO healthcenters(name,productcode,orgid,province,city,district,createDate,updateDate)
+		VALUES(#{name},#{productcode},#{orgid},#{province},#{city},#{district},NOW(),NOW())
+	</insert>
+
+	<update id="updHealthCenter"
+		parameterType="com.dto.HealthCenterDto">
+		update healthcenters set name = #{name},productcode = #{productcode},orgid = #{orgid},
+		province = #{province},city = #{city},district = #{district},updateDate = NOW()
+		where id = #{id}
+	</update>
+	
+	<select id="getCenterByid" resultMap="FormModel"
+		parameterType="int">
+			SELECT t1.id as field1,
+			       t1.name as field2,
+			       t1.productcode as field3,
+			       t1.orgid as field4,
+			       t2.hcode as field5
+			from healthcenters t1 LEFT JOIN areas t2 
+			ON t1.district = t2.code
+			WHERE t1.id = #{id}
+	</select>
+
+</mapper>

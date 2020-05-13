@@ -1,0 +1,19 @@
+
+ 2019 MAY 06   10:15:30
+ NAME:pppppp111112
+ ID:  1-0003     (00018010)
+ LEU        +-   15Leu/
+uL
+ NIT         -        neg
+ URO         - <=0.2mg/dL
+ PRO         -        neg
+ PH         6.5 
+         
+ BLO         -        neg
+ SG         1.005        
+ KET         -        neg
+ BIL    
+     -        neg
+ GLU         -        neg
+ ASC         -        neg
+

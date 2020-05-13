@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dao.PatientMapper">
+	<resultMap id="PatientMap" type="com.dto.PatientDto"></resultMap>
+
+	<select id="getList" resultMap="PatientMap" parameterType="java.util.Map">
+		select * from patients where hcid = #{hcid}
+		<if test="code!='' and code!=null">
+			and code =#{code}
+		</if>
+		<if test="pname!='' and pname!=null">
+			and name like concat('%',#{pname},'%')
+		</if>
+		<if test="idcard!='' and idcard!=null">
+			and idcard =#{idcard}
+		</if>
+		and filedate >= STR_TO_DATE(#{startDate},'%Y-%m-%d %H:%i:%s')
+		<![CDATA[
+		and filedate <= STR_TO_DATE(#{endDate},'%Y-%m-%d %H:%i:%s')
+		]]>
+	</select>
+	
+	<select id="getDetail" resultMap="PatientMap" parameterType="int">
+		select * from patients where id = #{id}
+	</select>
+	
+	<select id="getPatientByUUID" resultMap="PatientMap" parameterType="java.util.Map">
+		select * from patients where hcid = #{hcid}  
+		and updateDate > STR_TO_DATE(#{dateTime},'%Y-%m-%d %H:%i:%s')  
+		order by updateDate desc
+	</select>
+	
+	<update id="updPatientHeath"
+		parameterType="com.dto.PatientDto">
+		update patients set name = #{name},address = #{address},
+		address1 = #{address1},phoneno = #{phoneno},countyname = #{countyname},
+		vcname = #{vcname},fileunit = #{fileunit},fileuser = #{fileuser},
+		doctor = #{doctor}
+		where id = #{id}
+	</update>
+	
+	<update id="updHealthCase"
+		parameterType="com.dto.PatientDto">
+		update patients set name = #{name},phoneno = #{phoneno},idcard = #{idcard},company = #{company},
+		    cname = #{cname},cphoneno = #{cphoneno},sname1 = #{sname1},sname2 = #{sname2},
+			tname1 = #{tname1},tname2 = #{tname2},breason1 = #{breason1},breason2 = #{breason2},
+			father = #{father},mother = #{mother},bsrelative = #{bsrelative},children = #{children},
+			dname = #{dname},sex = #{sex},rtype = #{rtype},nationality = #{nationality},
+			blood = #{blood},RH = #{RH},elevel = #{elevel},career = #{career},marital = #{marital},
+			surgery = #{surgery},trauma = #{trauma},btran = #{btran},genetic = #{genetic},kfacility = #{kfacility},
+			ftype = #{ftype},dwater = #{dwater},toilet = #{toilet},poultry = #{poultry},paymentway = #{paymentway},
+			allergy = #{allergy},exposure = #{exposure},disease = #{disease},disability = #{disability},
+			field1 = #{field1},field2 = #{field2},field3 = #{field3},
+			field4 = #{field4},field5 = #{field5},field6 = #{field6},
+			field7 = #{field7},field8 = #{field8},
+			<if test="birthdate!=null">
+				birthdate = #{birthdate},
+			</if>
+			<if test="ctime1!=null">
+				ctime1 = #{ctime1},
+			</if>
+			<if test="ctime2!=null">
+				ctime2 = #{ctime2},
+			</if>
+			<if test="ctime3!=null">
+				ctime3 = #{ctime3},
+			</if>
+			<if test="ctime4!=null">
+				ctime4 = #{ctime4},
+			</if>
+			<if test="stime1!=null">
+				stime1 = #{stime1},
+			</if>
+			<if test="stime2!=null">
+				stime2 = #{stime2},
+			</if>
+			<if test="btime1!=null">
+				btime1 = #{btime1},
+			</if>
+			<if test="btime2!=null">
+				btime2 = #{btime2},
+			</if>
+			<if test="ttime1!=null">
+				ttime1 = #{ttime1},
+			</if>
+			<if test="ttime2!=null">
+				ttime2 = #{ttime2},
+			</if>
+			field9 = #{field9},field10 = #{field10}
+		where id = #{id}
+	</update>
+	
+    <delete id="delPatient1" parameterType="int">
+		delete from healthcheckup where pid = #{id}
+	</delete>
+	
+	<delete id="delPatient2" parameterType="int">
+		delete from selfcare where pid = #{id}
+	</delete>
+	
+	<delete id="delPatient3" parameterType="int">
+		delete from TCM where pid = #{id}
+	</delete>
+	
+	<delete id="delPatient4" parameterType="int">
+		delete from patients where id = #{id}
+	</delete>
+	
+	<update id="updPatientMt"
+		parameterType="java.util.Map">
+		update patients set mtid = #{mtid},personid = #{personid}
+		where id = #{pid}
+	</update>
+	
+</mapper>

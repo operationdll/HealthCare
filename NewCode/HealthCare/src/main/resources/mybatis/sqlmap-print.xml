@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dao.PrintMapper">
+	<resultMap id="PrintFormMap" type="com.form.PrintForm"></resultMap>
+
+	<!-- 获取查询信息 -->
+	<select id="getPrintList" resultMap="PrintFormMap"
+		parameterType="java.util.Map">
+		SELECT t1.id as pid,
+				t1.idcard as idCard,
+				t1.name as name,
+				t1.code as code,
+				t1.birthdate,
+				t2.field1 as examDate,
+				t1.doctor as resDoctor,
+				t4.name as insName,
+				t1.sex as sex,
+				t1.phoneno as phoneno,
+				t1.address as address,
+				t1.address1 as address1
+				from patients t1
+		LEFT JOIN healthcheckup t2 ON t1.id = t2.pid
+		LEFT JOIN TCM t3 ON t1.id = t3.pid
+		LEFT JOIN healthcenters t4 ON t1.hcid = t4.id
+		WHERE 1=1
+		and t1.hcid = #{hcid}
+		<if test="idCard!='' and idCard!=null">
+			and t1.idcard = #{idCard}
+		</if>
+		<if test="name!='' and name!=null">
+			and t1.name like concat('%',#{name},'%')
+		</if>
+		<if test="code!='' and code!=null">
+			and t1.code = #{code}
+		</if>
+		<if test="ageOver!='' and ageOver!=null">
+			<![CDATA[
+			and t1.birthdate <= STR_TO_DATE(#{ageOver},'%Y-%m-%d')
+			]]>
+		</if>
+		<if test="ageLow!='' and ageLow!=null">
+			and t1.birthdate > STR_TO_DATE(#{ageLow},'%Y-%m-%d')
+		</if>
+		and t2.field1 >= STR_TO_DATE(#{startDate},'%Y-%m-%d %H:%i:%s')
+		<![CDATA[
+		and t2.field1 <= STR_TO_DATE(#{endDate},'%Y-%m-%d %H:%i:%s')
+		]]>
+	</select>
+	
+	<!-- 获取查询信息 -->
+	<select id="gxtyData" resultMap="PrintFormMap"
+		parameterType="java.util.Map">
+		SELECT t1.id as pid,
+				t1.idcard as idCard,
+				t1.name as name,
+				t1.code as code,
+				t1.birthdate,
+				t2.field1 as examDate,
+				t1.doctor as resDoctor,
+				t4.name as insName,
+				t1.sex as sex,
+				t1.phoneno as phoneno,
+				t1.address as address,
+				t1.address1 as address1,
+				t1.disease as filed1,
+				CONCAT(t2.field7,'fg',t2.field8,'fg',t2.field9,'fg',t2.field10) as filed2,
+				t2.field106 as filed3
+				from patients t1
+		LEFT JOIN healthcheckup t2 ON t1.id = t2.pid
+		LEFT JOIN TCM t3 ON t1.id = t3.pid
+		LEFT JOIN healthcenters t4 ON t1.hcid = t4.id
+		WHERE 1=1
+		and t1.hcid = #{hcid}
+		<if test="idCard!='' and idCard!=null">
+			and t1.idcard = #{idCard}
+		</if>
+		<if test="name!='' and name!=null">
+			and t1.name like concat('%',#{name},'%')
+		</if>
+		<if test="code!='' and code!=null">
+			and t1.code = #{code}
+		</if>
+		<if test="ageOver!='' and ageOver!=null">
+			<![CDATA[
+			and t1.birthdate <= STR_TO_DATE(#{ageOver},'%Y-%m-%d')
+			]]>
+		</if>
+		<if test="ageLow!='' and ageLow!=null">
+			and t1.birthdate > STR_TO_DATE(#{ageLow},'%Y-%m-%d')
+		</if>
+		and t2.field1 >= STR_TO_DATE(#{startDate},'%Y-%m-%d %H:%i:%s')
+		<![CDATA[
+		and t2.field1 <= STR_TO_DATE(#{endDate},'%Y-%m-%d %H:%i:%s')
+		]]>
+	</select>
+
+</mapper>
